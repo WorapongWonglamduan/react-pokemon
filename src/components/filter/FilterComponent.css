@@ -1,0 +1,16 @@
+.wrap-filter {
+  display: flex;
+  justify-content: space-between;
+}
+.wrap-filter__options {
+  display: flex;
+  gap: 30px;
+}
+@media (max-width: 768px) {
+  .wrap-filter {
+    flex-direction: column;
+  }
+  .wrap-filter__options {
+    justify-content: center;
+  }
+}
