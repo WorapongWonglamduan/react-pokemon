@@ -4,7 +4,6 @@
 }
 .wrap-filter__options {
   display: flex;
-  gap: 30px;
 }
 @media (max-width: 768px) {
   .wrap-filter {
