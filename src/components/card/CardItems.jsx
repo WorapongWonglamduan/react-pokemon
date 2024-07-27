@@ -15,7 +15,8 @@ const CardItems = ({ item }) => {
         <div> Details : {name}</div>
         <div> Details : {name}</div>
         <div> Details : {name}</div>
-        <div> Details : {name}</div>
+        <br />
+        <div className="card-item_btn-cart">Add to cart</div>
       </div>
     </div>
   );
