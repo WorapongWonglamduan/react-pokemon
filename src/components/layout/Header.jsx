@@ -3,7 +3,7 @@ import "./Header.css";
 import { Img } from "../../assets/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-
+import iconBag from "../../assets/icon-bag.svg";
 const Header = ({ setFilterOptions, setSideBarOpen }) => {
   const [mobileMode, setMobileMode] = useState(window.innerWidth <= 768);
   const [state, setState] = useState({ search: "" });
@@ -35,12 +35,12 @@ const Header = ({ setFilterOptions, setSideBarOpen }) => {
       {mobileMode ? (
         <div className="d-flex justify-content-between align-items-center">
           <div className="header__title">Pokemon market</div>
-          <img
-            src={Img.iconCart}
-            alt="Cart"
-            className="icon-cart"
+          <div
+            className="wrap-icon__cart"
             onClick={() => setSideBarOpen((prev) => !prev)}
-          />
+          >
+            <img src={iconBag} alt="Cart" className="icon-cart" />
+          </div>
         </div>
       ) : (
         <div className="header__title">Pokemon market</div>
@@ -51,7 +51,7 @@ const Header = ({ setFilterOptions, setSideBarOpen }) => {
           <div className="search-wrapper">
             <FontAwesomeIcon icon={faMagnifyingGlass} className="search-icon" />
             <input
-              className="search-box"
+              className="search-box "
               name="search"
               type="text"
               placeholder="Search by Name"
@@ -64,7 +64,7 @@ const Header = ({ setFilterOptions, setSideBarOpen }) => {
           className="header__cart"
           onClick={() => setSideBarOpen((prev) => !prev)}
         >
-          <img src={Img.iconCart} alt="Cart" className="icon-cart" />
+          <img src={iconBag} alt="Cart" className="icon-cart" />
         </div>
       </div>
     </header>

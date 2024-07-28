@@ -8,6 +8,7 @@
 }
 .wrap-filter__select {
   color: #fff;
+  width: 100%;
   padding: 8px;
   background-color: #1f1d2b;
   border-radius: 8px;

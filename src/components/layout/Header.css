@@ -27,7 +27,7 @@
   width: 200px;
   padding: 12px 12px 12px 30px;
   border-radius: 12px;
-  border-width: 1px;
+  border-width: 1.5px;
   border-color: #abbbc2;
   background-color: #252836;
   color: #fff;
@@ -42,12 +42,34 @@
 .header__cart {
   width: 48px;
   height: 48px;
+  position: relative;
+  background-color: #ea7c69;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
 }
-.icon-cart {
+.header__cart:hover {
+  background-color: #ec4e32;
+}
+.wrap-icon__cart {
   width: 48px;
   height: 48px;
+  position: relative;
+  background-color: #ea7c69;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+}
+.wrap-icon__cart:hover {
+  background-color: #ec4e32;
+}
+.icon-cart {
+  width: 25px;
+  height: 25px;
 }
 
 @media (max-width: 768px) {

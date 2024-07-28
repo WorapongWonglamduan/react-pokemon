@@ -3,7 +3,7 @@ import "./SideBar.css";
 import CartItems from "../card/CartItems";
 import { Img } from "../../assets/image";
 import { useDispatch, useSelector } from "react-redux";
-
+import iconX from "../../assets/icon-x.svg";
 const SideBar = ({ sideBarOpen, setSideBarOpen }) => {
   const cart = useSelector((state) => state.cart);
   const memoizedCart = useMemo(() => cart, [cart]);
@@ -44,10 +44,7 @@ const SideBar = ({ sideBarOpen, setSideBarOpen }) => {
       sum + current.count * current.cardmarket.prices.averageSellPrice,
     0
   );
-  console.log("====================================");
-  console.log("cardCount -->", cardCount);
-  console.log("totalPrice -->", totalPrice);
-  console.log("====================================");
+
   useEffect(() => {
     getData();
   }, [cart]);
@@ -71,12 +68,17 @@ const SideBar = ({ sideBarOpen, setSideBarOpen }) => {
                 clear all
               </div>
             </div>
-            <img
-              src={Img.iconCartClose}
-              className="icon-cart-close"
-              onClick={toggleSidebar}
-              alt=""
-            />
+            <div className="wrap-icon-cart" onClick={toggleSidebar}>
+              <div className="wrap-icon-x">
+                <img src={iconX} alt="" className="icon-x" />
+              </div>
+              <img
+                id="icon"
+                src={Img.iconCartClose}
+                className="icon-cart-close"
+                alt=""
+              />
+            </div>
           </div>
           <div className="sidebar__list">
             <div className="sidebar__list-head">

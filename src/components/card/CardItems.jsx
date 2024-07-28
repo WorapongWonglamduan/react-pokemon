@@ -1,6 +1,7 @@
 import React from "react";
 import "./CardItems.css";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const CardItems = ({ item, setPokemon }) => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const CardItems = ({ item, setPokemon }) => {
         })
       );
       dispatch({ type: "ADD_CART", payload: { ...item, count: 1 } });
+      toast.success("added");
     }
   };
 

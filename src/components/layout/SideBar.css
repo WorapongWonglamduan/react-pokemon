@@ -59,6 +59,30 @@
   cursor: pointer;
   text-decoration: underline;
 }
+.wrap-icon-cart {
+  position: relative;
+}
+
+.wrap-icon-cart:hover .icon-cart-close {
+  filter: brightness(0) saturate(100%) invert(46%) sepia(61%) saturate(5037%)
+    hue-rotate(343deg) brightness(97%) contrast(91%);
+}
+
+.wrap-icon-x {
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.icon-x {
+  width: 50%;
+  height: 50%;
+}
 
 .icon-cart-close {
   width: 48px;
