@@ -3,12 +3,15 @@ import "./Home.css";
 import FilterComponent from "../filter/FilterComponent";
 import CardItems from "../card/CardItems";
 import { getPokemon } from "../api/baseApi";
-const Content = () => {
-  const array = Array.from({ length: 20 }, (_, index) => ({ name: index + 1 }));
+const Content = ({ pokemon }) => {
+  // const array = Array.from({ length: 20 }, (_, index) => ({ name: index + 1 }));
+  console.log("====================================");
+  console.log("pokemon->", pokemon);
+  console.log("====================================");
   return (
     <div className="row">
-      {array.map((item) => (
-        <div key={item} className="col-xl-2 col-md-3">
+      {pokemon.map((item, index) => (
+        <div key={index} className="col-xl-2 col-md-3">
           <CardItems item={item} />
         </div>
       ))}
@@ -18,15 +21,14 @@ const Content = () => {
 const Home = () => {
   const [filterOptions, setFilterOptions] = useState({ page: 1, pageSize: 20 });
   const [loading, setLoading] = useState(false);
+  const [pokemon, setPokemon] = useState([]);
   const getData = async () => {
     setLoading(true);
 
     const res = await getPokemon(filterOptions);
-    console.log("====================================");
-    console.log("res->", res);
-    console.log("====================================");
 
     setTimeout(() => {
+      if (res) setPokemon(res.data.data);
       setLoading(false);
     }, 1500);
   };
@@ -41,7 +43,7 @@ const Home = () => {
       ) : (
         <>
           <FilterComponent />
-          <Content />
+          <Content pokemon={pokemon} />
         </>
       )}
     </div>
