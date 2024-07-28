@@ -12,7 +12,7 @@ const Details3Colums = ({ col1, col2, col3 }) => {
   );
 };
 
-const CartItems = ({ item, cart }) => {
+const CartItems = ({ item }) => {
   const dispatch = useDispatch();
   const {
     id,
@@ -24,19 +24,10 @@ const CartItems = ({ item, cart }) => {
 
   const price = averageSellPrice * count;
   const addQty = () => {
-    const add = cart.map((cart) => {
-      if (cart.id === id) {
-        return { ...cart, count: cart.count + 1 };
-      }
-      return { ...cart };
-    });
+    dispatch({ type: "ADD_QTY", payload: { id } });
   };
-  const minusQty = () => {
-    const cartStorage =
-      localStorage.getItem("cart") && JSON.parse(localStorage.getItem("cart"));
-    console.log("====================================");
-    console.log("minus");
-    console.log("====================================");
+  const removeQty = () => {
+    dispatch({ type: "REMOVE_QTY", payload: { id } });
   };
   return (
     <div className="wrap-cart-item">
@@ -51,7 +42,7 @@ const CartItems = ({ item, cart }) => {
         col3={<div>$ {price}</div>}
       />
       <div className="cart-item__adjust">
-        <div className="cart-item-btn-minus" onClick={minusQty}>
+        <div className="cart-item-btn-minus" onClick={removeQty}>
           -
         </div>
         <div className="cart-item-btn-qty">{count}</div>

@@ -2,11 +2,12 @@ import React, { useState, useEffect, useMemo } from "react";
 import "./SideBar.css";
 import CartItems from "../card/CartItems";
 import { Img } from "../../assets/image";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const SideBar = ({ sideBarOpen, setSideBarOpen }) => {
   const cart = useSelector((state) => state.cart);
   const memoizedCart = useMemo(() => cart, [cart]);
+  const dispatch = useDispatch();
 
   const [cartState, setCartState] = useState([]);
 
@@ -29,9 +30,28 @@ const SideBar = ({ sideBarOpen, setSideBarOpen }) => {
   const toggleSidebar = () => {
     setSideBarOpen((prev) => !prev);
   };
+
+  const clearAllCart = () => {
+    dispatch({ type: "CLEAR_CART", payload: [] });
+  };
+  const cardCount = memoizedCart.reduce(
+    (sum, current) => sum + current.count,
+    0
+  );
+
+  const totalPrice = memoizedCart.reduce(
+    (sum, current) =>
+      sum + current.count * current.cardmarket.prices.averageSellPrice,
+    0
+  );
+  console.log("====================================");
+  console.log("cardCount -->", cardCount);
+  console.log("totalPrice -->", totalPrice);
+  console.log("====================================");
   useEffect(() => {
     getData();
   }, [cart]);
+
   return (
     <>
       <div
@@ -47,7 +67,9 @@ const SideBar = ({ sideBarOpen, setSideBarOpen }) => {
           <div className="sidebar_head-content">
             <div>
               <div className="sidebar_head-title">Cart</div>
-              <div>clear all</div>
+              <div className="sidebar_head-clear-all" onClick={clearAllCart}>
+                clear all
+              </div>
             </div>
             <img
               src={Img.iconCartClose}
@@ -76,6 +98,15 @@ const SideBar = ({ sideBarOpen, setSideBarOpen }) => {
             </div>
           </div>
           <div className="sidebar__action">
+            <div className="sidebar__action-total">
+              <div>Total card amount</div>
+              <div>{cardCount}</div>
+            </div>
+            <div className="sidebar__action-total">
+              <div>Total price</div>
+              <div>$ {totalPrice}</div>
+            </div>
+
             <button className="btn-checkout">Continue Payment</button>
           </div>
         </div>

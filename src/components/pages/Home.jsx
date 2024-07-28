@@ -37,7 +37,7 @@ const Home = ({ setSideBarOpen }) => {
   const [loading, setLoading] = useState(false);
   const [pokemon, setPokemon] = useState([]);
   const [countItem, setCountItem] = useState(0);
-
+  const cartStorage = memoizedCart;
   const getData = async () => {
     setLoading(true);
     const { page, pageSize, name, types, rarity, set } = filterOptions;
@@ -57,7 +57,6 @@ const Home = ({ setSideBarOpen }) => {
 
     setTimeout(() => {
       if (res) {
-        const cartStorage = memoizedCart;
         const resPokemon = res.data.data.map((pokemon) => {
           const isCommon =
             cartStorage && cartStorage.length > 0
@@ -75,6 +74,23 @@ const Home = ({ setSideBarOpen }) => {
       setLoading(false);
     }, 1500);
   };
+
+  useEffect(() => {
+    setPokemon((prev) => {
+      return prev.map((pokemon) => {
+        const isCommon =
+          cartStorage && cartStorage.length > 0
+            ? cartStorage.some((cart) => pokemon.id === cart.id)
+            : false;
+
+        if (isCommon) {
+          return { ...pokemon, in_cart: true };
+        }
+        return { ...pokemon, in_cart: false };
+      });
+    });
+  }, [memoizedCart]);
+
   useEffect(() => {
     getData();
   }, [filterOptions]);
