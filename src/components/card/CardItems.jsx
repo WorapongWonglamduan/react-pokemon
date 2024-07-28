@@ -1,12 +1,15 @@
 import React from "react";
 import "./CardItems.css";
+import { useDispatch } from "react-redux";
 
-const CardItems = ({ item }) => {
+const CardItems = ({ item, setPokemon }) => {
+  const dispatch = useDispatch();
   const {
     name,
     cardmarket: { prices: { averageSellPrice } = {} } = {},
     set: { total } = {},
     images: { small, large } = {},
+    in_cart,
   } = item;
 
   const bulletPoint = (
@@ -15,6 +18,21 @@ const CardItems = ({ item }) => {
     </span>
   );
   const totalCard = total > 0 ? `${total} cards` : "Out of stock";
+
+  const handleAddToCart = () => {
+    if (!in_cart) {
+      setPokemon((prev) =>
+        prev.map((pokemon) => {
+          if (pokemon.id === item.id) {
+            return { ...pokemon, in_cart: true };
+          }
+          return { ...pokemon };
+        })
+      );
+      dispatch({ type: "ADD_CART", payload: { ...item, count: 1 } });
+    }
+  };
+
   return (
     <div className="card-item">
       <div className="card-item__wrap-img-pokemon">
@@ -28,7 +46,14 @@ const CardItems = ({ item }) => {
           {bulletPoint}
           {totalCard}
         </p>
-        <div className="card-item_btn-cart">Add to cart</div>
+        <div
+          className={
+            in_cart ? "card-item_btn-cart-disable" : "card-item_btn-cart"
+          }
+          onClick={handleAddToCart}
+        >
+          Add to cart
+        </div>
       </div>
     </div>
   );

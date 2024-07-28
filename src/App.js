@@ -7,7 +7,7 @@ import Home from "./components/pages/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-  const [sideBarOpen, setSideBarOpen] = useState(true);
+  const [sideBarOpen, setSideBarOpen] = useState(false);
   return (
     <div className="App">
       <SideBar sideBarOpen={sideBarOpen} setSideBarOpen={setSideBarOpen} />

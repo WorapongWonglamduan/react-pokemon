@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./Home.css";
 import FilterComponent from "../filter/FilterComponent";
 import CardItems from "../card/CardItems";
@@ -8,19 +8,23 @@ import Header from "../layout/Header";
 import Paginate from "../paginate/Paginate";
 import DataNotFound from "../data-not-found/DataNotFound";
 import Loading from "../loading/Loading";
+import { useSelector } from "react-redux";
 
-const Content = ({ pokemon }) => {
+const Content = ({ pokemon, setPokemon }) => {
   return (
     <div className="row">
       {pokemon.map((item, index) => (
         <div key={index} className="col-xl-2 col-md-3">
-          <CardItems item={item} />
+          <CardItems item={item} setPokemon={setPokemon} />
         </div>
       ))}
     </div>
   );
 };
 const Home = ({ setSideBarOpen }) => {
+  const cart = useSelector((state) => state.cart);
+
+  const memoizedCart = useMemo(() => cart, [cart]);
   const [filterOptions, setFilterOptions] = useState({
     page: 1,
     pageSize: 20,
@@ -53,7 +57,19 @@ const Home = ({ setSideBarOpen }) => {
 
     setTimeout(() => {
       if (res) {
-        setPokemon(res.data.data);
+        const cartStorage = memoizedCart;
+        const resPokemon = res.data.data.map((pokemon) => {
+          const isCommon =
+            cartStorage && cartStorage.length > 0
+              ? cartStorage.some((cart) => pokemon.id === cart.id)
+              : false;
+
+          if (isCommon) {
+            return { ...pokemon, in_cart: true };
+          }
+          return { ...pokemon, in_cart: false };
+        });
+        setPokemon(resPokemon);
         setCountItem(res.data.totalCount);
       }
       setLoading(false);
@@ -80,7 +96,7 @@ const Home = ({ setSideBarOpen }) => {
         <>
           {pokemon.length > 0 ? (
             <>
-              <Content pokemon={pokemon} />
+              <Content pokemon={pokemon} setPokemon={setPokemon} />
               <Paginate
                 filterOptions={filterOptions}
                 setFilterOptions={setFilterOptions}

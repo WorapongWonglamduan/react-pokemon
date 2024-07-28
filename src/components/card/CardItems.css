@@ -33,8 +33,18 @@
 }
 .card-item_btn-cart {
   padding: 13px;
-  background-color: #312f3c;
+  background-color: #363946;
   border-radius: 10px;
+  cursor: pointer;
+}
+.card-item_btn-cart-disable {
+  padding: 13px;
+  background-color: #2e303e;
+  border-radius: 10px;
+  cursor: not-allowed;
+}
+.card-item_btn-cart:hover {
+  background-color: #4c4f5a;
 }
 
 .card-item__details-price {

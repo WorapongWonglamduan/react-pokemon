@@ -1,10 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "./SideBar.css";
 import CartItems from "../card/CartItems";
 import { Img } from "../../assets/image";
+import { useSelector } from "react-redux";
 
 const SideBar = ({ sideBarOpen, setSideBarOpen }) => {
-  const data = Array.from({ length: 30 }).map((item, index) => index + 1);
+  const cart = useSelector((state) => state.cart);
+  const memoizedCart = useMemo(() => cart, [cart]);
+
+  const [cartState, setCartState] = useState([]);
+
+  const getData = () => {
+    setCartState(memoizedCart);
+  };
 
   useEffect(() => {
     if (sideBarOpen) {
@@ -21,7 +29,9 @@ const SideBar = ({ sideBarOpen, setSideBarOpen }) => {
   const toggleSidebar = () => {
     setSideBarOpen((prev) => !prev);
   };
-
+  useEffect(() => {
+    getData();
+  }, [cart]);
   return (
     <>
       <div
@@ -35,11 +45,15 @@ const SideBar = ({ sideBarOpen, setSideBarOpen }) => {
           }}
         >
           <div className="sidebar_head-content">
-            <div className="sidebar_head-title">Cart</div>
+            <div>
+              <div className="sidebar_head-title">Cart</div>
+              <div>clear all</div>
+            </div>
             <img
               src={Img.iconCartClose}
               className="icon-cart-close"
               onClick={toggleSidebar}
+              alt=""
             />
           </div>
           <div className="sidebar__list">
@@ -49,11 +63,16 @@ const SideBar = ({ sideBarOpen, setSideBarOpen }) => {
               <div className="sidebar__list-col3">Price</div>
             </div>
             <div className="sidebar__list-cart">
-              {data.map((item, index) => (
-                <div key={index}>
-                  <CartItems item={item} />
-                </div>
-              ))}
+              {cartState &&
+                cartState.map((item, index) => (
+                  <div key={index}>
+                    <CartItems
+                      item={item}
+                      setCartState={setCartState}
+                      cart={cart}
+                    />
+                  </div>
+                ))}
             </div>
           </div>
           <div className="sidebar__action">
