@@ -25,11 +25,9 @@ const FilterComponent = ({ filterOptions, setFilterOptions }) => {
   const handleSelect = (e) => {
     const { name, value } = e.target;
 
-    setFilterOptions((prev) => ({ ...prev, [name]: value }));
+    setFilterOptions((prev) => ({ ...prev, [name]: value, page: 1 }));
   };
-  console.log("====================================");
-  console.log("filterOptions->", filterOptions);
-  console.log("====================================");
+
   useEffect(() => {
     getData();
   }, []);

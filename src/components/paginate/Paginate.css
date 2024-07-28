@@ -1,3 +1,40 @@
 .wrap-paginate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  flex-direction: column;
+}
+
+.wrap-paginate button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.wrap-paginate button.active {
+  background-color: #1f1d2b;
+  color: #fff;
+  border-color: #abbbc2;
+}
+
+.wrap-paginate button:disabled {
+  background-color: #f1f1f1;
+  cursor: not-allowed;
+}
+
+.wrap-paginate input {
+  max-width: 70px;
+  text-align: center;
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.wrap-paginate__details {
   padding: 10px 0;
 }

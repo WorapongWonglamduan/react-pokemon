@@ -4,11 +4,9 @@ import "./CardItems.css";
 const CardItems = ({ item }) => {
   const {
     name,
-    cardmarket: {
-      prices: { averageSellPrice },
-    },
-    set: { total },
-    images: { small, large },
+    cardmarket: { prices: { averageSellPrice } = {} } = {},
+    set: { total } = {},
+    images: { small, large } = {},
   } = item;
 
   const bulletPoint = (

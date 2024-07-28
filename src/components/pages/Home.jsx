@@ -25,11 +25,12 @@ const Home = () => {
     types: "",
     set: "",
     rarity: "",
-    count: 0,
   });
 
   const [loading, setLoading] = useState(false);
   const [pokemon, setPokemon] = useState([]);
+  const [countItem, setCountItem] = useState(0);
+
   const getData = async () => {
     setLoading(true);
     const { page, pageSize, name, types, rarity, set } = filterOptions;
@@ -48,7 +49,10 @@ const Home = () => {
     const res = await getPokemon(params);
 
     setTimeout(() => {
-      if (res) setPokemon(res.data.data);
+      if (res) {
+        setPokemon(res.data.data);
+        setCountItem(res.data.totalCount);
+      }
       setLoading(false);
     }, 1500);
   };
@@ -71,7 +75,11 @@ const Home = () => {
       ) : (
         <>
           <Content pokemon={pokemon} />
-          <Paginate />
+          <Paginate
+            filterOptions={filterOptions}
+            setFilterOptions={setFilterOptions}
+            countItem={countItem}
+          />
         </>
       )}
     </div>

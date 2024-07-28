@@ -19,15 +19,12 @@ const Header = ({ setFilterOptions }) => {
     const { name, value } = e.target;
     setState((prev) => ({ ...prev, [name]: value }));
   };
-  console.log("====================================");
-  console.log("state->", state);
-  console.log("====================================");
   useEffect(() => {
     const delay = setTimeout(() => {
       if (state.search) {
-        setFilterOptions((prev) => ({ ...prev, name: state.search }));
+        setFilterOptions((prev) => ({ ...prev, name: state.search, page: 1 }));
       } else {
-        setFilterOptions((prev) => ({ ...prev, name: "" }));
+        setFilterOptions((prev) => ({ ...prev, name: "", page: 1 }));
       }
     }, 500);
 
