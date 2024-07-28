@@ -1,11 +1,10 @@
 .header {
   background-color: #252836;
   color: #fff;
-  padding: 1.5rem 5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 26px;
+  padding: 20px 0px;
 }
 
 .header___action {
@@ -18,12 +17,13 @@
   position: relative;
   display: flex;
   align-items: center;
+
   width: 100%;
 }
 
 .search-box {
-  min-width: 150;
-  padding: 14px 20px 14px 50px;
+  min-width: 100px;
+  padding: 2px 10px 2px 30px;
   border-radius: 8px;
   border-width: 1px;
   border-color: #abbbc2;
@@ -33,17 +33,17 @@
 
 .search-icon {
   position: absolute;
-  left: 20px;
-  width: 20px;
-  height: 20px;
+  left: 10px;
+  width: 10px;
+  height: 10px;
 }
 .header__cart {
-  width: 80px;
-  height: 80px;
+  width: 40px;
+  height: 40px;
 }
 .icon-cart {
-  width: 80px;
-  height: 80px;
+  width: 40px;
+  height: 40px;
 }
 
 @media (max-width: 768px) {

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import "./Navbar.css";
+import "./Header.css";
 import { Img } from "../../assets/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
-const Navbar = ({ user }) => {
+const Header = ({ setFilterOptions }) => {
   const [mobileMode, setMobileMode] = useState(window.innerWidth <= 768);
-
+  const [state, setState] = useState({ search: "" });
   const handleResize = () => {
     setMobileMode(window.innerWidth <= 768);
   };
@@ -15,7 +15,24 @@ const Navbar = ({ user }) => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setState((prev) => ({ ...prev, [name]: value }));
+  };
+  console.log("====================================");
+  console.log("state->", state);
+  console.log("====================================");
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      if (state.search) {
+        setFilterOptions((prev) => ({ ...prev, name: state.search }));
+      } else {
+        setFilterOptions((prev) => ({ ...prev, name: "" }));
+      }
+    }, 500);
 
+    return () => clearTimeout(delay);
+  }, [state.search]);
   return (
     <header className="header">
       {mobileMode ? (
@@ -31,7 +48,14 @@ const Navbar = ({ user }) => {
         <nav className="navbar">
           <div className="search-wrapper">
             <FontAwesomeIcon icon={faMagnifyingGlass} className="search-icon" />
-            <input className="search-box" type="text" placeholder="Search..." />
+            <input
+              className="search-box"
+              name="search"
+              type="text"
+              placeholder="Search..."
+              value={state.search}
+              onChange={handleChange}
+            />
           </div>
         </nav>
         <div className="header__cart">
@@ -42,4 +66,4 @@ const Navbar = ({ user }) => {
   );
 };
 
-export default Navbar;
+export default Header;

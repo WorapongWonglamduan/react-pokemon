@@ -3,11 +3,10 @@ import "./Home.css";
 import FilterComponent from "../filter/FilterComponent";
 import CardItems from "../card/CardItems";
 import { getPokemon } from "../api/baseApi";
+
+import Header from "../layout/Header";
+import Paginate from "../paginate/Paginate";
 const Content = ({ pokemon }) => {
-  // const array = Array.from({ length: 20 }, (_, index) => ({ name: index + 1 }));
-  console.log("====================================");
-  console.log("pokemon->", pokemon);
-  console.log("====================================");
   return (
     <div className="row">
       {pokemon.map((item, index) => (
@@ -19,13 +18,34 @@ const Content = ({ pokemon }) => {
   );
 };
 const Home = () => {
-  const [filterOptions, setFilterOptions] = useState({ page: 1, pageSize: 20 });
+  const [filterOptions, setFilterOptions] = useState({
+    page: 1,
+    pageSize: 20,
+    name: "",
+    types: "",
+    set: "",
+    rarity: "",
+    count: 0,
+  });
+
   const [loading, setLoading] = useState(false);
   const [pokemon, setPokemon] = useState([]);
   const getData = async () => {
     setLoading(true);
+    const { page, pageSize, name, types, rarity, set } = filterOptions;
+    let query = [];
+    if (name) query.push(`name:${name}`);
+    if (types) query.push(`types:${types}`);
+    if (rarity) query.push(`rarity:"${rarity}"`);
+    if (set) query.push(`set.id:${set}`);
 
-    const res = await getPokemon(filterOptions);
+    const params = {
+      page,
+      pageSize,
+      q: query.join(" "),
+    };
+
+    const res = await getPokemon(params);
 
     setTimeout(() => {
       if (res) setPokemon(res.data.data);
@@ -34,16 +54,24 @@ const Home = () => {
   };
   useEffect(() => {
     getData();
-  }, []);
+  }, [filterOptions]);
 
   return (
     <div className="home">
+      <Header
+        filterOptions={filterOptions}
+        setFilterOptions={setFilterOptions}
+      />
+      <FilterComponent
+        filterOptions={filterOptions}
+        setFilterOptions={setFilterOptions}
+      />
       {loading ? (
         <div>Loading ...</div>
       ) : (
         <>
-          <FilterComponent />
           <Content pokemon={pokemon} />
+          <Paginate />
         </>
       )}
     </div>

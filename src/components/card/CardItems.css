@@ -13,6 +13,7 @@
   width: 65%;
   /* height: 220px; */
   top: 4rem;
+  border-radius: 10px;
 }
 .card-item__img-pokemon {
   width: 100%;
