@@ -4,7 +4,7 @@ import { Img } from "../../assets/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
-const Header = ({ setFilterOptions }) => {
+const Header = ({ setFilterOptions, setSideBarOpen }) => {
   const [mobileMode, setMobileMode] = useState(window.innerWidth <= 768);
   const [state, setState] = useState({ search: "" });
   const handleResize = () => {
@@ -35,7 +35,12 @@ const Header = ({ setFilterOptions }) => {
       {mobileMode ? (
         <div className="d-flex justify-content-between align-items-center">
           <div>Pokemon market</div>
-          <img src={Img.iconCart} alt="Cart" className="icon-cart" />
+          <img
+            src={Img.iconCart}
+            alt="Cart"
+            className="icon-cart"
+            onClick={() => setSideBarOpen((prev) => !prev)}
+          />
         </div>
       ) : (
         <div>Pokemon market</div>
@@ -55,7 +60,10 @@ const Header = ({ setFilterOptions }) => {
             />
           </div>
         </nav>
-        <div className="header__cart">
+        <div
+          className="header__cart"
+          onClick={() => setSideBarOpen((prev) => !prev)}
+        >
           <img src={Img.iconCart} alt="Cart" className="icon-cart" />
         </div>
       </div>

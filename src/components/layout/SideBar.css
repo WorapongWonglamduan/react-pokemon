@@ -1,0 +1,107 @@
+/* Prevent scrolling of the body when the sidebar is open */
+.no-scroll {
+  overflow: hidden;
+}
+
+.overlay {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sidebar {
+  width: 400px;
+  background-color: #252836;
+  color: #fff;
+  position: fixed;
+  right: -400px;
+  top: 0;
+  height: 100vh;
+  z-index: 3;
+  display: grid;
+  grid-template-rows: 70px 1fr 70px;
+  transition: right 0.3s ease;
+  padding: 20px;
+  padding-top: 0px;
+}
+
+.sidebar.active {
+  right: 0;
+}
+
+.sidebar_head-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar_head-title {
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.sidebar_head-clear-all {
+  font-size: 12px;
+}
+
+.sidebar__action {
+  width: 100%;
+}
+
+.sidebar__action .btn-checkout {
+  background-color: #ea7c69;
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  color: #fff;
+}
+
+.sidebar__list-head {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.sidebar__list-col1 {
+  width: 25%;
+}
+
+.sidebar__list-col2 {
+  width: 55%;
+}
+
+.sidebar__list-col3 {
+  width: 20%;
+}
+
+.sidebar__list-cart {
+  overflow-y: auto;
+  max-height: calc(100vh - 170px);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.sidebar__list-cart::-webkit-scrollbar {
+  display: none;
+}
+.icon-cart-close {
+  width: 30px;
+  height: 30px;
+}
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100vw;
+  }
+}

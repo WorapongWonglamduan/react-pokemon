@@ -6,6 +6,9 @@ import { getPokemon } from "../api/baseApi";
 
 import Header from "../layout/Header";
 import Paginate from "../paginate/Paginate";
+import DataNotFound from "../data-not-found/DataNotFound";
+import Loading from "../loading/Loading";
+
 const Content = ({ pokemon }) => {
   return (
     <div className="row">
@@ -17,7 +20,7 @@ const Content = ({ pokemon }) => {
     </div>
   );
 };
-const Home = () => {
+const Home = ({ setSideBarOpen }) => {
   const [filterOptions, setFilterOptions] = useState({
     page: 1,
     pageSize: 20,
@@ -65,21 +68,28 @@ const Home = () => {
       <Header
         filterOptions={filterOptions}
         setFilterOptions={setFilterOptions}
+        setSideBarOpen={setSideBarOpen}
       />
       <FilterComponent
         filterOptions={filterOptions}
         setFilterOptions={setFilterOptions}
       />
       {loading ? (
-        <div>Loading ...</div>
+        <Loading />
       ) : (
         <>
-          <Content pokemon={pokemon} />
-          <Paginate
-            filterOptions={filterOptions}
-            setFilterOptions={setFilterOptions}
-            countItem={countItem}
-          />
+          {pokemon.length > 0 ? (
+            <>
+              <Content pokemon={pokemon} />
+              <Paginate
+                filterOptions={filterOptions}
+                setFilterOptions={setFilterOptions}
+                countItem={countItem}
+              />
+            </>
+          ) : (
+            <DataNotFound />
+          )}
         </>
       )}
     </div>
