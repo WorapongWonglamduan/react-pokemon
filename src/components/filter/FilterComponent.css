@@ -5,6 +5,7 @@
 }
 .wrap-filter__options {
   display: flex;
+  justify-content: space-between;
 }
 .wrap-filter__select {
   color: #fff;

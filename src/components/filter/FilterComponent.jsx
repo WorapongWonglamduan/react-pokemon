@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./FilterComponent.css";
 import { getRarities, getSets, getTypes } from "../api/baseApi";
+import CustomDropdown from "./CustomDropdown"; // Import your custom dropdown component
+
 const FilterComponent = ({ filterOptions, setFilterOptions }) => {
   const [filterAction, setFilterAction] = useState({
     types: [],
-    rarities: [],
-    sets: [],
+    rarity: [],
+    set: [],
   });
 
   const getData = async () => {
@@ -16,106 +18,65 @@ const FilterComponent = ({ filterOptions, setFilterOptions }) => {
     if ((resTypes, resRarities, resSets))
       setFilterAction((prev) => ({
         ...prev,
-        types: resTypes,
-        rarities: resRarities,
-        sets: resSets.map((item) => ({ id: item.id, name: item.name })),
+        types: [{ id: "", name: "Type" }].concat(
+          resTypes.map((item) => ({ id: item, name: item }))
+        ),
+        rarity: [{ id: "", name: "Rarity" }].concat(
+          resRarities.map((item) => ({ id: item, name: item }))
+        ),
+        set: [{ id: "", name: "Set" }].concat(
+          resSets.map((item) => ({ id: item.id, name: item.name }))
+        ),
       }));
   };
 
-  const handleSelect = (e) => {
-    const { name, value } = e.target;
-
-    setFilterOptions((prev) => ({ ...prev, [name]: value, page: 1 }));
+  const handleSelect = (name, value) => {
+    setFilterOptions((prev) => {
+      if (name === "types" && value === "Type") {
+        return { ...prev, [name]: "", page: 1 };
+      }
+      if (name === "rarity" && value === "Rarity") {
+        return { ...prev, [name]: "", page: 1 };
+      }
+      if (name === "set" && value === "Set") {
+        return { ...prev, [name]: "", page: 1 };
+      }
+      return { ...prev, [name]: value, page: 1 };
+    });
   };
 
   useEffect(() => {
     getData();
   }, []);
+
   return (
     <div className="wrap-filter">
       <div className="wrap-filter__title">Choose Card</div>
       <div className="wrap-filter__options">
         <div className="row">
           <div className="col">
-            <select
-              name="types"
-              id="typesSelect"
-              className="wrap-filter__select"
-              onChange={handleSelect}
-              defaultValue={filterOptions.types}
-            >
-              <option
-                className="wrap-filter__select-options"
-                value={""}
-                selected
-              >
-                Type
-              </option>
-              {filterAction.types &&
-                filterAction.types.map((item, index) => (
-                  <option
-                    className="wrap-filter__select-options"
-                    key={index}
-                    value={item}
-                  >
-                    {item}
-                  </option>
-                ))}
-            </select>
+            <CustomDropdown
+              options={filterAction.types}
+              value={filterOptions.types}
+              onChange={(value) => handleSelect("types", value)}
+              placeholder="Type"
+            />
           </div>
           <div className="col">
-            <select
-              name="rarity"
-              id="raritiesSelect"
-              className="wrap-filter__select"
-              onChange={handleSelect}
-              defaultValue={filterOptions.rarity}
-            >
-              <option
-                className="wrap-filter__select-options"
-                value={""}
-                selected
-              >
-                Rarities
-              </option>
-              {filterAction.rarities &&
-                filterAction.rarities.map((item, index) => (
-                  <option
-                    className="wrap-filter__select-options"
-                    key={index}
-                    value={item}
-                  >
-                    {item}
-                  </option>
-                ))}
-            </select>
+            <CustomDropdown
+              options={filterAction.rarity}
+              value={filterOptions.rarity}
+              onChange={(value) => handleSelect("rarity", value)}
+              placeholder="Rarity"
+            />
           </div>
           <div className="col">
-            <select
-              name="set"
-              id="setSelect"
-              className="wrap-filter__select"
-              onChange={handleSelect}
-              defaultValue={filterOptions.set}
-            >
-              <option
-                className="wrap-filter__select-options"
-                value={""}
-                selected
-              >
-                Set
-              </option>
-              {filterAction.sets &&
-                filterAction.sets.map((item, index) => (
-                  <option
-                    className="wrap-filter__select-options"
-                    key={index}
-                    value={item.id}
-                  >
-                    {item.name}
-                  </option>
-                ))}
-            </select>
+            <CustomDropdown
+              options={filterAction.set}
+              value={filterOptions.set}
+              onChange={(value) => handleSelect("set", value)}
+              placeholder="Set"
+            />
           </div>
         </div>
       </div>
