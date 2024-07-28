@@ -33,16 +33,19 @@
   color: #fff;
   width: 20%;
   border-radius: 10px;
-  background-color: #4c4f5a;
+  background-color: #363946;
   text-align: center;
   cursor: pointer;
+}
+.cart-item-btn-minus:hover {
+  background-color: #4c4f5a;
 }
 .cart-item-btn-qty {
   padding: 15px;
   color: #fff;
   width: 60%;
   border-radius: 10px;
-  background-color: #4c4f5a;
+  background-color: #363946;
   text-align: center;
 }
 .cart-item-btn-plus {
@@ -50,7 +53,10 @@
   color: #fff;
   width: 20%;
   border-radius: 10px;
-  background-color: #4c4f5a;
+  background-color: #363946;
   text-align: center;
   cursor: pointer;
+}
+.cart-item-btn-plus:hover {
+  background-color: #4c4f5a;
 }

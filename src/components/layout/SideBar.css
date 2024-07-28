@@ -34,7 +34,7 @@
   grid-template-rows: auto 1fr auto;
   transition: right 0.3s ease;
   padding: 20px;
-  padding-top: 0px;
+  padding-top: 10px;
   /* overflow-y: auto; */
 }
 
@@ -61,8 +61,8 @@
 }
 
 .icon-cart-close {
-  width: 30px;
-  height: 30px;
+  width: 48px;
+  height: 48px;
   cursor: pointer;
 }
 
@@ -124,6 +124,9 @@
   border-radius: 10px;
   color: #fff;
   cursor: pointer;
+}
+.sidebar__action .btn-checkout:hover {
+  background-color: #ec4e32;
 }
 
 .sidebar__action-total {

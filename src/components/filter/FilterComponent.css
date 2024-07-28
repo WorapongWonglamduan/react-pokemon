@@ -13,6 +13,10 @@
   border-radius: 8px;
   /* appearance: none;  */
 }
+.wrap-filter__title {
+  font-size: 18px;
+  font-weight: 600;
+}
 
 @media (max-width: 768px) {
   .wrap-filter {

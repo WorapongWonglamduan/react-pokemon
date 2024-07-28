@@ -33,7 +33,7 @@ const FilterComponent = ({ filterOptions, setFilterOptions }) => {
   }, []);
   return (
     <div className="wrap-filter">
-      <div>Choose Card</div>
+      <div className="wrap-filter__title">Choose Card</div>
       <div className="wrap-filter__options">
         <div className="row">
           <div className="col">
@@ -44,12 +44,20 @@ const FilterComponent = ({ filterOptions, setFilterOptions }) => {
               onChange={handleSelect}
               defaultValue={filterOptions.types}
             >
-              <option value={""} selected>
+              <option
+                className="wrap-filter__select-options"
+                value={""}
+                selected
+              >
                 Type
               </option>
               {filterAction.types &&
                 filterAction.types.map((item, index) => (
-                  <option key={index} value={item}>
+                  <option
+                    className="wrap-filter__select-options"
+                    key={index}
+                    value={item}
+                  >
                     {item}
                   </option>
                 ))}
@@ -63,12 +71,20 @@ const FilterComponent = ({ filterOptions, setFilterOptions }) => {
               onChange={handleSelect}
               defaultValue={filterOptions.rarity}
             >
-              <option value={""} selected>
+              <option
+                className="wrap-filter__select-options"
+                value={""}
+                selected
+              >
                 Rarities
               </option>
               {filterAction.rarities &&
                 filterAction.rarities.map((item, index) => (
-                  <option key={index} value={item}>
+                  <option
+                    className="wrap-filter__select-options"
+                    key={index}
+                    value={item}
+                  >
                     {item}
                   </option>
                 ))}
@@ -82,12 +98,20 @@ const FilterComponent = ({ filterOptions, setFilterOptions }) => {
               onChange={handleSelect}
               defaultValue={filterOptions.set}
             >
-              <option value={""} selected>
+              <option
+                className="wrap-filter__select-options"
+                value={""}
+                selected
+              >
                 Set
               </option>
               {filterAction.sets &&
                 filterAction.sets.map((item, index) => (
-                  <option key={index} value={item.id}>
+                  <option
+                    className="wrap-filter__select-options"
+                    key={index}
+                    value={item.id}
+                  >
                     {item.name}
                   </option>
                 ))}

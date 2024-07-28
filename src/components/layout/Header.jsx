@@ -26,7 +26,7 @@ const Header = ({ setFilterOptions, setSideBarOpen }) => {
       } else {
         setFilterOptions((prev) => ({ ...prev, name: "", page: 1 }));
       }
-    }, 500);
+    }, 300);
 
     return () => clearTimeout(delay);
   }, [state.search]);
@@ -34,7 +34,7 @@ const Header = ({ setFilterOptions, setSideBarOpen }) => {
     <header className="header">
       {mobileMode ? (
         <div className="d-flex justify-content-between align-items-center">
-          <div>Pokemon market</div>
+          <div className="header__title">Pokemon market</div>
           <img
             src={Img.iconCart}
             alt="Cart"
@@ -43,7 +43,7 @@ const Header = ({ setFilterOptions, setSideBarOpen }) => {
           />
         </div>
       ) : (
-        <div>Pokemon market</div>
+        <div className="header__title">Pokemon market</div>
       )}
 
       <div className="header___action">
@@ -54,7 +54,7 @@ const Header = ({ setFilterOptions, setSideBarOpen }) => {
               className="search-box"
               name="search"
               type="text"
-              placeholder="Search..."
+              placeholder="Search by Name"
               value={state.search}
               onChange={handleChange}
             />
