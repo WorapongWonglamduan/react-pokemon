@@ -11,11 +11,20 @@ const path = {
   sets: "https://api.pokemontcg.io/v2/sets",
 };
 
-export const getPokemon = async (params) => {
-  return await axios.get(path.cards, {
-    params: params,
-    headers: headers,
-  });
+export const getPokemon = async (params, signal) => {
+  const res = await axios
+    .get(path.cards, {
+      params: params,
+      headers: headers,
+      signal: signal,
+    })
+    .catch((e) => {
+      console.log("====================================");
+      console.log("err get pokemon->", e);
+      console.log("====================================");
+    });
+
+  return res;
 };
 export const getTypes = async () => {
   const res = await axios.get(path.types, {

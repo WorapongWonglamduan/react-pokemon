@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./Home.css";
 import FilterComponent from "../filter/FilterComponent";
 import CardItems from "../card/CardItems";
@@ -33,14 +33,20 @@ const Home = ({ setSideBarOpen }) => {
     set: { id: "", name: "" },
     rarity: "",
   });
-  console.log("====================================");
-  console.log(filterOptions);
-  console.log("====================================");
+
   const [loading, setLoading] = useState(false);
   const [pokemon, setPokemon] = useState([]);
   const [countItem, setCountItem] = useState(0);
   const cartStorage = memoizedCart;
+  const abortControllerRef = useRef(null);
+
   const getData = async () => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+    abortControllerRef.current = new AbortController();
+    const signal = abortControllerRef.current.signal;
+
     setLoading(true);
     const { page, pageSize, name, types, rarity, set } = filterOptions;
 
@@ -56,26 +62,24 @@ const Home = ({ setSideBarOpen }) => {
       q: query.join(" "),
     };
 
-    const res = await getPokemon(params);
+    const res = await getPokemon(params, signal);
 
-    setTimeout(() => {
-      if (res) {
-        const resPokemon = res.data.data.map((pokemon) => {
-          const isCommon =
-            cartStorage && cartStorage.length > 0
-              ? cartStorage.some((cart) => pokemon.id === cart.id)
-              : false;
+    if (res) {
+      const resPokemon = res.data.data.map((pokemon) => {
+        const isCommon =
+          cartStorage && cartStorage.length > 0
+            ? cartStorage.some((cart) => pokemon.id === cart.id)
+            : false;
 
-          if (isCommon) {
-            return { ...pokemon, in_cart: true };
-          }
-          return { ...pokemon, in_cart: false };
-        });
-        setPokemon(resPokemon);
-        setCountItem(res.data.totalCount);
-      }
+        if (isCommon) {
+          return { ...pokemon, in_cart: true };
+        }
+        return { ...pokemon, in_cart: false };
+      });
+      setPokemon(resPokemon);
+      setCountItem(res.data.totalCount);
       setLoading(false);
-    }, 1500);
+    }
   };
 
   useEffect(() => {
@@ -96,6 +100,11 @@ const Home = ({ setSideBarOpen }) => {
 
   useEffect(() => {
     getData();
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+    };
   }, [filterOptions]);
 
   return (
