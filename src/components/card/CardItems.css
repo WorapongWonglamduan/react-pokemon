@@ -42,6 +42,7 @@
   background-color: #2e303e;
   border-radius: 10px;
   cursor: not-allowed;
+  color: #504e59;
 }
 .card-item_btn-cart:hover {
   background-color: #4c4f5a;
@@ -49,6 +50,18 @@
 
 .card-item__details-price {
   color: #abbbc2;
+}
+
+.wrap-add-cart {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.card-item_btn-cart-disable .icon-bag {
+  filter: brightness(0) saturate(100%) invert(28%) sepia(5%) saturate(1049%)
+    hue-rotate(211deg) brightness(95%) contrast(83%);
 }
 @media (max-width: 768px) {
   .card-item__wrap-img-pokemon {

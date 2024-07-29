@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import "./CustomDropdown.css";
 
-const CustomDropdown = ({ options, value, onChange, placeholder }) => {
+const CustomDropdown = ({
+  options,
+  value,
+  onChange,
+  placeholder,
+  filterSet = false,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSelect = (option) => {
@@ -19,15 +25,25 @@ const CustomDropdown = ({ options, value, onChange, placeholder }) => {
       </div>
       {isOpen && (
         <div className="custom-dropdown__list">
-          {options.map((option, index) => (
-            <div
-              key={index}
-              className="custom-dropdown__option"
-              onClick={() => handleSelect(option.id)}
-            >
-              {option.name}
-            </div>
-          ))}
+          {filterSet
+            ? options.map((option, index) => (
+                <div
+                  key={index}
+                  className="custom-dropdown__option"
+                  onClick={() => handleSelect(option)}
+                >
+                  {option.name}
+                </div>
+              ))
+            : options.map((option, index) => (
+                <div
+                  key={index}
+                  className="custom-dropdown__option"
+                  onClick={() => handleSelect(option.id)}
+                >
+                  {option.name}
+                </div>
+              ))}
         </div>
       )}
     </div>

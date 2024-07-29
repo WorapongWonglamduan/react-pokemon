@@ -3,7 +3,7 @@ import "./SideBar.css";
 import CartItems from "../card/CartItems";
 import { Img } from "../../assets/image";
 import { useDispatch, useSelector } from "react-redux";
-import iconX from "../../assets/icon-x.svg";
+
 const SideBar = ({ sideBarOpen, setSideBarOpen }) => {
   const cart = useSelector((state) => state.cart);
   const memoizedCart = useMemo(() => cart, [cart]);
@@ -70,7 +70,7 @@ const SideBar = ({ sideBarOpen, setSideBarOpen }) => {
             </div>
             <div className="wrap-icon-cart" onClick={toggleSidebar}>
               <div className="wrap-icon-x">
-                <img src={iconX} alt="" className="icon-x" />
+                <img src={Img.iconX} alt="" className="icon-x" />
               </div>
               <img
                 id="icon"

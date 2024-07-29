@@ -2,6 +2,7 @@ import React from "react";
 import "./CardItems.css";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { Img } from "../../assets/image";
 
 const CardItems = ({ item, setPokemon }) => {
   const dispatch = useDispatch();
@@ -54,7 +55,10 @@ const CardItems = ({ item, setPokemon }) => {
           }
           onClick={handleAddToCart}
         >
-          Add to cart
+          <div className="wrap-add-cart">
+            <img src={Img.iconBag} alt="" className="icon-bag" />
+            <div> Add to cart</div>
+          </div>
         </div>
       </div>
     </div>

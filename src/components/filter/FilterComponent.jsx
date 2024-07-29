@@ -38,9 +38,15 @@ const FilterComponent = ({ filterOptions, setFilterOptions }) => {
       if (name === "rarity" && value === "Rarity") {
         return { ...prev, [name]: "", page: 1 };
       }
-      if (name === "set" && value === "Set") {
-        return { ...prev, [name]: "", page: 1 };
+
+      if (name === "set") {
+        if (name === "set" && value === "Set") {
+          return { ...prev, set: { id: "", name: "Set" }, page: 1 };
+        }
+
+        return { ...prev, set: { id: value.id, name: value.name }, page: 1 };
       }
+
       return { ...prev, [name]: value, page: 1 };
     });
   };
@@ -72,8 +78,9 @@ const FilterComponent = ({ filterOptions, setFilterOptions }) => {
           </div>
           <div className="col">
             <CustomDropdown
+              filterSet
               options={filterAction.set}
-              value={filterOptions.set}
+              value={filterOptions.set.name}
               onChange={(value) => handleSelect("set", value)}
               placeholder="Set"
             />

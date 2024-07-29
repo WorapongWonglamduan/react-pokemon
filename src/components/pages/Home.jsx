@@ -30,10 +30,12 @@ const Home = ({ setSideBarOpen }) => {
     pageSize: 20,
     name: "",
     types: "",
-    set: "",
+    set: { id: "", name: "" },
     rarity: "",
   });
-
+  console.log("====================================");
+  console.log(filterOptions);
+  console.log("====================================");
   const [loading, setLoading] = useState(false);
   const [pokemon, setPokemon] = useState([]);
   const [countItem, setCountItem] = useState(0);
@@ -41,11 +43,12 @@ const Home = ({ setSideBarOpen }) => {
   const getData = async () => {
     setLoading(true);
     const { page, pageSize, name, types, rarity, set } = filterOptions;
+
     let query = [];
     if (name) query.push(`name:${name}`);
     if (types) query.push(`types:${types}`);
     if (rarity) query.push(`rarity:"${rarity}"`);
-    if (set) query.push(`set.id:${set}`);
+    if (set.id) query.push(`set.id:${set.id}`);
 
     const params = {
       page,
