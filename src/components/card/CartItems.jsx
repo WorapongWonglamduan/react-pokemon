@@ -36,7 +36,7 @@ const CartItems = ({ item }) => {
         col2={
           <>
             <div>{name}</div>
-            <div>${averageSellPrice}</div>
+            <div className="cart-item__price">$ {averageSellPrice}</div>
           </>
         }
         col3={<div>$ {price}</div>}
