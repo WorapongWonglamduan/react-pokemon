@@ -96,6 +96,7 @@ const Home = ({ setSideBarOpen }) => {
         return { ...pokemon, in_cart: false };
       });
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [memoizedCart]);
 
   useEffect(() => {
@@ -105,6 +106,7 @@ const Home = ({ setSideBarOpen }) => {
         abortControllerRef.current.abort();
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterOptions]);
 
   return (

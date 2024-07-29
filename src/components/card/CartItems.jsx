@@ -18,7 +18,7 @@ const CartItems = ({ item }) => {
     id,
     name,
     cardmarket: { prices: { averageSellPrice } = {} } = {},
-    images: { small, large } = {},
+    images: { small /* large */ } = {},
     count,
   } = item;
 

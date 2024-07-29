@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Header.css";
-import { Img } from "../../assets/image";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import iconBag from "../../assets/icon-bag.svg";
@@ -29,6 +29,7 @@ const Header = ({ setFilterOptions, setSideBarOpen }) => {
     }, 300);
 
     return () => clearTimeout(delay);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.search]);
   return (
     <header className="header">

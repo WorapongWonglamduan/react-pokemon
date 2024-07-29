@@ -10,7 +10,7 @@ const CardItems = ({ item, setPokemon }) => {
     name,
     cardmarket: { prices: { averageSellPrice } = {} } = {},
     set: { total } = {},
-    images: { small, large } = {},
+    images: { small /* large */ } = {},
     in_cart,
   } = item;
 
