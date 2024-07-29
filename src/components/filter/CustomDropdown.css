@@ -20,7 +20,7 @@
   border: 1px solid #abbbc2;
   border-radius: 8px;
   background-color: #1f1d2b;
-  z-index: 1000;
+  z-index: 1;
   max-height: 200px;
   overflow-y: auto;
   scrollbar-width: none;

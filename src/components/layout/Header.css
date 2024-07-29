@@ -5,6 +5,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 0px;
+  border-bottom: 1px solid #444;
 }
 .header__title {
   font-size: 26px;
