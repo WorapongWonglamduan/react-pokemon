@@ -41,7 +41,7 @@ const SideBar = ({ sideBarOpen, setSideBarOpen }) => {
 
   const totalPrice = memoizedCart.reduce(
     (sum, current) =>
-      sum + current.count * current.cardmarket.prices.averageSellPrice,
+      sum + current.count * current?.cardmarket?.prices?.averageSellPrice,
     0
   );
 
