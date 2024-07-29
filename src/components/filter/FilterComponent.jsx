@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./FilterComponent.css";
 import { getRarities, getSets, getTypes } from "../api/baseApi";
-import CustomDropdown from "./CustomDropdown"; // Import your custom dropdown component
+import CustomDropdown from "./CustomDropdown";
 
 const FilterComponent = ({ filterOptions, setFilterOptions }) => {
   const [filterAction, setFilterAction] = useState({

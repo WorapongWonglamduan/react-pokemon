@@ -10,6 +10,9 @@
   background-color: #1f1d2b;
   color: #fff;
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .custom-dropdown__list-wrapper {
@@ -51,4 +54,12 @@
 
 .custom-dropdown__option:last-child {
   border-bottom: none;
+}
+
+.custom-dropdown__header i {
+  transition: transform 0.3s ease;
+}
+
+.custom-dropdown__header i.open {
+  transform: rotate(180deg);
 }

@@ -22,6 +22,7 @@ const CustomDropdown = ({
         onClick={() => setIsOpen(!isOpen)}
       >
         {value || placeholder}
+        <i className={`fas fa-chevron-down ${isOpen ? "open" : ""}`}></i>
       </div>
       <div className={`custom-dropdown__list-wrapper ${isOpen ? "open" : ""}`}>
         <div className="custom-dropdown__list">
