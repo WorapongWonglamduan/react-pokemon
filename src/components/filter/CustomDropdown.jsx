@@ -23,7 +23,7 @@ const CustomDropdown = ({
       >
         {value || placeholder}
       </div>
-      {isOpen && (
+      <div className={`custom-dropdown__list-wrapper ${isOpen ? "open" : ""}`}>
         <div className="custom-dropdown__list">
           {filterSet
             ? options.map((option, index) => (
@@ -45,7 +45,7 @@ const CustomDropdown = ({
                 </div>
               ))}
         </div>
-      )}
+      </div>
     </div>
   );
 };

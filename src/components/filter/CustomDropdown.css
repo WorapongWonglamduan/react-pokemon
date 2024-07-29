@@ -12,7 +12,7 @@
   cursor: pointer;
 }
 
-.custom-dropdown__list {
+.custom-dropdown__list-wrapper {
   position: absolute;
   top: 100%;
   left: 0;
@@ -21,6 +21,18 @@
   border-radius: 8px;
   background-color: #1f1d2b;
   z-index: 1;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.custom-dropdown__list-wrapper.open {
+  max-height: 200px;
+  opacity: 1;
+}
+
+.custom-dropdown__list {
   max-height: 200px;
   overflow-y: auto;
   scrollbar-width: none;
