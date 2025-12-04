@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const headers = {
-  Authorization: `X-Api-Key ${process.env.API_POKEMON_KEY}`,
+  Authorization: `X-Api-Key: ${process.env.REACT_APP_POKEMON_KEY}`,
   "Content-Type": "application/json",
 };
 const path = {
